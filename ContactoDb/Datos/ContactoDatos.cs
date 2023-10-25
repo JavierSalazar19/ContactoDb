@@ -97,8 +97,9 @@ namespace ContactoDb.Datos
                     //Ejecutar el procedimiento almacenado
                     cmd.ExecuteNonQuery();
                     //si no ocurre un erro la variable rpta sera true
-                    respuesta = true;
+                    
                 }
+                respuesta = true;
             }
             catch (Exception e)
             {
@@ -145,7 +146,7 @@ namespace ContactoDb.Datos
         }
 
         //Método de eliminar
-        public bool EliminarContacto(int IdContacto)
+        public bool EliminarContacto(ContactoModel model)
         {
             bool respuesta;
             try
@@ -155,7 +156,7 @@ namespace ContactoDb.Datos
                 {
                     conexion.Open();
                     SqlCommand cmd = new SqlCommand("sp_Eliminar", conexion);
-                    cmd.Parameters.AddWithValue("IdContacto", IdContacto);
+                    cmd.Parameters.AddWithValue("IdContacto", model.IdContacto);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
